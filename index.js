@@ -646,7 +646,7 @@ try {
                     var { readFileSync } = require('fs-extra');
                 const { execSync } = require('child_process');
             axios.get('https://pastebin.com/raw/u09fqR8C').then(async (res) => {
-                const localbrand = JSON.parse(readFileSync('./node_modules/fca-brasl/package.json')).version;
+                const localbrand = JSON.parse(readFileSync('./node_modules/fca-dongdev/package.json')).version;
                     if (localbrand != res.data.version) {
                         log.warn("[ FCA-DONGDEV ] •",`Phiên Bản Mới Đã Được Publish: ${JSON.parse(readFileSync('./node_modules/fca-dongdev/package.json')).version} => ${res.data.version}`);
                         log.warn("[ FCA-DONGDEV ] •",`Tiến Hành Tự Động Cập Nhật Lên Phiên Bản Mới Nhất !`);
