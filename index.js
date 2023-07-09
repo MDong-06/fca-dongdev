@@ -87,7 +87,7 @@ function buildAPI(globalOptions, html, jar) {
     if (html.indexOf("/checkpoint/block/?next") > -1) log.warn("login", "Phát Hiện CheckPoint - Không Đăng Nhập Được, Hãy Thử Logout Rồi Login Và Lấy Lại Appstate - Cookie !");
 
     var userID = maybeCookie[0].cookieString().split("=")[1].toString();
-    logger(`Đăng Nhập Tại ID: ${userID}`, "[ FCA-BRASL ]");
+    logger(`Đăng Nhập Tại ID: ${userID}`, "[ FCA-DONGDEV ]");
     process.env['UID'] = userID;
     try {
         clearInterval(checkVerified);
@@ -107,21 +107,21 @@ function buildAPI(globalOptions, html, jar) {
         irisSeqID = oldFBMQTTMatch[1];
         mqttEndpoint = oldFBMQTTMatch[2];
         region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
-        logger(`Vùng Của Tài Khoản Là: ${region}`, "[ FCA-BRASL ]");
+        logger(`Vùng Của Tài Khoản Là: ${region}`, "[ FCA-DONGDEV ]");
     } else {
         let newFBMQTTMatch = html.match(/{"app_id":"219994525426954","endpoint":"(.+?)","iris_seq_id":"(.+?)"}/);
         if (newFBMQTTMatch) {
             irisSeqID = newFBMQTTMatch[2];
             mqttEndpoint = newFBMQTTMatch[1].replace(/\\\//g, "/");
             region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
-            logger(`Vùng Của Tài Khoản Là:  ${region}`, "[ FCA-BRASL ]");
+            logger(`Vùng Của Tài Khoản Là:  ${region}`, "[ FCA-DONGDEV ]");
         } else {
             let legacyFBMQTTMatch = html.match(/(\["MqttWebConfig",\[\],{fbid:")(.+?)(",appID:219994525426954,endpoint:")(.+?)(",pollingEndpoint:")(.+?)(3790])/);
             if (legacyFBMQTTMatch) {
                 mqttEndpoint = legacyFBMQTTMatch[4];
                 region = new URL(mqttEndpoint).searchParams.get("region").toUpperCase();
                 log.warn("login", `Cannot get sequence ID with new RegExp. Fallback to old RegExp (without seqID)...`);
-                logger(`Vùng Của Tài Khoản Là: ${region}`, "[ FCA-BRASL ]");
+                logger(`Vùng Của Tài Khoản Là: ${region}`, "[ FCA-DONGDEV ]");
                 logger("login", `[Unused] Polling endpoint: ${legacyFBMQTTMatch[6]}`);
             } else {
                 log.warn("login", "Không Thể Lấy ID Hãy Thử Lại !");
@@ -263,7 +263,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
         });
         // ---------- Very Hacky Part Ends -----------------
 
-        logger("Đang Đăng Nhập...", "[ FCA-BRASL ]");
+        logger("Đang Đăng Nhập...", "[ FCA-DONGDEV ]");
         return utils
             .post("https://www.facebook.com/login/device-based/regular/login/?login_attempt=1&lwv=110", jar, form, loginOptions)
             .then(utils.saveCookies(jar))
@@ -273,7 +273,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
 
                 // This means the account has login approvals turned on.
                 if (headers.location.indexOf('https://www.facebook.com/checkpoint/') > -1) {
-                    logger("Bạn Đang Bật 2 Bảo Mật !", "[ FCA-BRASL ]");
+                    logger("Bạn Đang Bật 2 Bảo Mật !", "[ FCA-DONGDEV ]");
                     var nextURL = 'https://www.facebook.com/checkpoint/?next=https%3A%2F%2Fwww.facebook.com%2Fhome.php';
 
                     return utils
@@ -365,7 +365,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
                                                         JSON.parse(res.body.replace(/for\s*\(\s*;\s*;\s*\)\s*;\s*/, ""));
                                                     } catch (ex) {
                                                         clearInterval(checkVerified);
-                                                        logger("Xác Nhận Từ Trình Duyệt, Đang Đăng Nhập...", "[ FCA-BRASL ]");
+                                                        logger("Xác Nhận Từ Trình Duyệt, Đang Đăng Nhập...", "[ FCA-DONGDEV ]");
                                                         if (callback === prCallback) {
                                                             callback = function(err, api) {
                                                                 if (err) return prReject(err);
@@ -452,7 +452,7 @@ try {
         // let rl = readline.createInterface({
         // input: process.stdin,
         // output: process.stdout,
-        // prompt: chalk.hex('#00CCCC').bold('[FCA-BRASL] • ')
+        // prompt: chalk.hex('#00CCCC').bold('[FCA-DONGDEV] • ')
         // });
         // let type = {
         //     1: {    
@@ -464,17 +464,17 @@ try {
         //                 process.env["FBKEY"] = answer;
         //                     fs.writeFile('../.env', `FBKEY=${answer}`, function (err) {
         //                         if (err) {
-        //                             logger("Tạo File ENV Thất Bại !", "[ FCA-BRASL ]")
+        //                             logger("Tạo File ENV Thất Bại !", "[ FCA-DONGDEV ]")
         //                             rl.pause();
         //                         }
-        //                         else logger("Tạo Thành Công File ENV !","[ FCA-BRASL ]")
+        //                         else logger("Tạo Thành Công File ENV !","[ FCA-DONGDEV ]")
         //                         rl.pause();
         //                     });
         //                 })
         //             }
         //             catch (e) {
         //                 console.log(e);
-        //                 logger("Đã Có Lỗi Khi Đang Try Tạo Ra Câu Hỏi =))", "[ FCA-BRASL ]");
+        //                 logger("Đã Có Lỗi Khi Đang Try Tạo Ra Câu Hỏi =))", "[ FCA-DONGDEV ]");
         //                 rl.pause();
         //             }
         //         }
@@ -531,14 +531,14 @@ try {
                     process.env["FBKEY"] = ans;
                         fs.writeFile('./../.env', `FBKEY=${ans}`, function (err) {
                             if (err) {
-                            logger("Tạo File ENV Thất Bại !", "[ FCA-BRASL ]");
+                            logger("Tạo File ENV Thất Bại !", "[ FCA-DONGDEV ]");
                     }
-                else logger("Tạo Thành Công File ENV !","[ FCA-BRASL ]")
+                else logger("Tạo Thành Công File ENV !","[ FCA-DONGDEV ]")
         }); 
     }
     catch (e) {
         console.log(e);
-        logger("Đã Có Lỗi Khi Đang Try Tạo Random Password =))", "[ FCA-BRASL ]");
+        logger("Đã Có Lỗi Khi Đang Try Tạo Random Password =))", "[ FCA-DONGDEV ]");
     }
 }
     
@@ -546,18 +546,18 @@ try {
         try {
             appState = JSON.stringify(appState);
             if (appState.includes('[')) {
-                logger('Chưa Sẵn Sàng Để Decrypt Appstate !', '[ FCA-BRASL ]');
+                logger('Chưa Sẵn Sàng Để Decrypt Appstate !', '[ FCA-DONGDEV ]');
             } else {
                 try {
                     appState = JSON.parse(appState);
                     var StateCrypt = require('./StateCrypt');
                     var keyy = process.env['FBKEY'];
                     appState = StateCrypt.decryptState(appState, process.env['FBKEY']);
-                    logger('Decrypt Appstate Thành Công !', '[ FCA-BRASL ]');
+                    logger('Decrypt Appstate Thành Công !', '[ FCA-DONGDEV ]');
                     logger('Password AppState là :' + keyy, '[ PASS-FCAD ]');
                 }
                 catch (e) {
-                    logger('Thay AppState Đi !', '[ FCA-BRASL ]');
+                    logger('Thay AppState Đi !', '[ FCA-DONGDEV ]');
                 }
             }
         }
@@ -573,7 +573,7 @@ try {
             appState = appState;
         }
         catch (e) {
-            return logger('Thay AppState Đi !', '[ FCA-BRASL ]')
+            return logger('Thay AppState Đi !', '[ FCA-DONGDEV ]')
         }
     }
     try { 
@@ -585,7 +585,7 @@ try {
     // Load the main page.
     mainPromise = utils.get('https://www.facebook.com/', jar, null, globalOptions, { noRef: true }).then(utils.saveCookies(jar));
 } catch (e) {
-    return logger('Thay AppState Đi !', '[ FCA-BRASL ]')
+    return logger('Thay AppState Đi !', '[ FCA-DONGDEV ]')
 }
 } else {
         // Open the main page, then we login with the given credentials and finally
@@ -639,8 +639,8 @@ try {
                         // At the end we call the callback or catch an exception
             mainPromise
                 .then(function() {
-                    logger('Hoàn Thành Quá Trình Đăng Nhập !', "[ FCA-BRASL ]");
-                        logger('Auto Check Update ...', "[ FCA-BRASL ]");
+                    logger('Hoàn Thành Quá Trình Đăng Nhập !', "[ FCA-DONGDEV ]");
+                        logger('Auto Check Update ...', "[ FCA-DONGDEV ]");
                             //!---------- Auto Check, Update START -----------------!//
                         var axios = require('axios');
                     var { readFileSync } = require('fs-extra');
@@ -648,12 +648,12 @@ try {
             axios.get('https://pastebin.com/raw/u09fqR8C').then(async (res) => {
                 const localbrand = JSON.parse(readFileSync('./node_modules/fca-brasl/package.json')).version;
                     if (localbrand != res.data.version) {
-                        log.warn("[ FCA-BRASL ] •",`Phiên Bản Mới Đã Được Publish: ${JSON.parse(readFileSync('./node_modules/fca-brasl/package.json')).version} => ${res.data.version}`);
-                        log.warn("[ FCA-BRASL ] •",`Tiến Hành Tự Động Cập Nhật Lên Phiên Bản Mới Nhất !`);
+                        log.warn("[ FCA-DONGDEV ] •",`Phiên Bản Mới Đã Được Publish: ${JSON.parse(readFileSync('./node_modules/fca-dongdev/package.json')).version} => ${res.data.version}`);
+                        log.warn("[ FCA-DONGDEV ] •",`Tiến Hành Tự Động Cập Nhật Lên Phiên Bản Mới Nhất !`);
                             try {
-                                execSync('npm install fca-BRASL@latest', { stdio: 'inherit' });
-                                logger("Nâng Cấp Phiên Bản Thành Công!","[ FCA-BRASL ]")
-                                logger('Đang Khởi Động Lại...', '[ FCA-BRASL ]');
+                                execSync('npm install fca-dongdev@latest', { stdio: 'inherit' });
+                                logger("Nâng Cấp Phiên Bản Thành Công!","[ FCA-DONGDEV ]")
+                                logger('Đang Khởi Động Lại...', '[ FCA-DONGDEV ]');
                                 await new Promise(resolve => setTimeout(resolve,5*1000));
                                 console.clear();process.exit(1);
                             }
@@ -665,17 +665,17 @@ try {
                                 /*try {
                                     var { data } = await axios.get(`https://bank-sv-4.duongduong216.repl.co/fcaerr?error=${encodeURI(err)}&senderID=${encodeURI(process.env['UID'] || "IDK")}&DirName=${encodeURI(__dirname)}`);
                                     if (data) {
-                                        logger.onLogger('Đã Gửi Báo Cáo Lỗi Tới Server !', '[ FCA-BRASL ]'," #FF0000")
+                                        logger.onLogger('Đã Gửi Báo Cáo Lỗi Tới Server !', '[ FCA-DONGDEV ]'," #FF0000")
                                     }
                                 }
                                 catch (e) {
-                                    logger.onLogger('Đã Xảy Ra Lỗi Khi Cố Gửi Lỗi Đến Server', '[ FCA-BRASL ]'," #FF0000")
+                                    logger.onLogger('Đã Xảy Ra Lỗi Khi Cố Gửi Lỗi Đến Server', '[ FCA-DONGDEV ]'," #FF0000")
                                 }*/
                             
                         }
                     }
                         else { 
-                            logger(`Bạn Hiện Đang Sử Dụng Phiên Bản: ` + localbrand + ' !', "[ FCA-BRASL ]"); 
+                            logger(`Bạn Hiện Đang Sử Dụng Phiên Bản: ` + localbrand + ' !', "[ FCA-DONGDEV ]"); 
                             logger(`Chúc Bạn Một Ngày Tốt Lành !`)     
                             await new Promise(resolve => setTimeout(resolve, 5*1000));
                             callback(null, api);
