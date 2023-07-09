@@ -1,6 +1,6 @@
 {
-  "name": "fca-kaneki",
-  "version": "3.0.0",
+  "name": "fca-dongdev",
+  "version": "1.7.8",
   "description": "Facebook Chat Api",
   "scripts": {
     "test": "mocha",
@@ -12,7 +12,9 @@
     "url": "git://github.com/"
   },
   "keywords": [
-    "fca-kaneki"
+    "fca-dongdev",
+    "fb-chat-api",
+    "fca"
   ],
   "bugs": {
     "url": "https://github.com/"
