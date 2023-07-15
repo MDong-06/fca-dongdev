@@ -1,7 +1,7 @@
 {
-  "name": "fca-dongdev",
-  "version": "1.7.8",
-  "description": "Facebook chat API that doesn't rely on XMPP.",
+  "name": "fca-dongdz-remake",
+  "version": "1.2.8",
+  "description": "Facebook Chat Api Hỗ Trợ Cho BotChat Messendger!!!",
   "scripts": {
     "test": "mocha",
     "lint": "./node_modules/.bin/eslint **.js",
@@ -9,12 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/"
+    "url": "git://github.com/..."
   },
   "keywords": [
-    "fca-dongdev",
-    "fb-chat-api",
-    "fca"
+    "Fca",
+    "fca-dongdz-remake",
+    "fca bot",
+    "fca",
+    "Fca-dongdz-remake"
   ],
   "bugs": {
     "url": "https://github.com/"
@@ -22,19 +24,18 @@
   "author": "Avery, David, Maude, Benjamin",
   "license": "MIT",
   "dependencies": {
-    "aes-js": "latest",
-    "axios": "latest",
+    "aes-js": "^3.1.2",
+    "axios": "^1.2.1",
     "bluebird": "^2.11.0",
-    "chalk": "4.1.2",
-    "cheerio": "latest",
-    "crypto": "latest",
-    "dotenv": "^16.0.1",
-    "https-proxy-agent": "latest",
-    "mqtt": "latest",
-    "npmlog": "latest",
-    "request": "latest",
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^16.0.3",
+    "fs-extra": "^11.1.0",
+    "https-proxy-agent": "^4.0.0",
+    "mqtt": "^4.2.8",
+    "npmlog": "^1.2.0",
+    "request": "^2.53.0",
     "semver": "latest",
-    "websocket-stream": "latest"
+    "websocket-stream": "^5.5.0"
   },
   "engines": {
     "node": ">=10.x"
@@ -70,4 +71,4 @@
       ]
     }
   }
-}
+  
