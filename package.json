@@ -1,6 +1,6 @@
 {
   "name": "fca-dongdz-remake",
-  "version": "1.2.8",
+  "version": "1.4.0",
   "description": "Facebook Chat Api Hỗ Trợ Cho BotChat Messendger!!!",
   "scripts": {
     "test": "mocha",
